@@ -17,6 +17,7 @@ import React, {Component} from 'react';
 import Search from '../Common/Search/Search';
 import './Landing.css';
 import axios from 'axios';
+import config from '../../config';
 
 class Landing extends Component {
     constructor(props) {
@@ -38,7 +39,7 @@ class Landing extends Component {
     
 
     callZillowAPI(address, cityAndStateAndZip) {
-        const zwsId = "X1-ZWz185dx75jrwr_5ywzw";
+        const zwsId = config['zillow_api_key'];
         
         const url = `https://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=${zwsId}&address=${address}&citystatezip=${cityAndStateAndZip}`;
 
@@ -50,6 +51,10 @@ class Landing extends Component {
         });
     }
 
+
+    componentDidMount() {
+        this.callZillowAPI('2114+Bigelow+Ave', 'Seattle%2C+WA');
+    }
     handleNavChange(event, navIndex) {
         this.setState({navIndex});
         const path = this.routes[navIndex];
