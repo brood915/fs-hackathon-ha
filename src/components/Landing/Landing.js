@@ -16,6 +16,7 @@ limitations under the License.
 import React, {Component} from 'react';
 import Search from '../Common/Search/Search';
 import './Landing.css';
+import axios from 'axios';
 
 class Landing extends Component {
     constructor(props) {
@@ -30,7 +31,23 @@ class Landing extends Component {
         };
 
         this.handleNavChange = this.handleNavChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);(
+        this.callZillowAPI = this.callZillowAPI.bind(this);
+    }
+
+    
+
+    callZillowAPI(address, cityAndStateAndZip) {
+        const zwsId = "X1-ZWz185dx75jrwr_5ywzw";
+        
+        const url = `https://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=${zwsId}&address=${address}&citystatezip=${cityAndStateAndZip}`;
+
+        axios({
+            method: 'get',
+            url,
+        }).then((resp) => {
+            console.log(resp);
+        });
     }
 
     handleNavChange(event, navIndex) {
