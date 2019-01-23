@@ -18,6 +18,7 @@ import Search from '../Common/Search/Search';
 import './Landing.css';
 import axios from 'axios';
 import config from '../../config';
+import xml2js from 'xml2js';
 
 class Landing extends Component {
     constructor(props) {
@@ -40,14 +41,16 @@ class Landing extends Component {
 
     callZillowAPI(address, cityAndStateAndZip) {
         const zwsId = config['zillow_api_key'];
-        
         const url = `https://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id=${zwsId}&address=${address}&citystatezip=${cityAndStateAndZip}`;
 
         axios({
             method: 'get',
             url,
         }).then((resp) => {
-            console.log(resp);
+            const parser = new xml2js.Parser();
+            parser.parseString(resp.data, function (err, result) {
+                console.log(result);
+            });
         });
     }
 
