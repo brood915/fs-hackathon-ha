@@ -49,7 +49,10 @@ class Landing extends Component {
         }).then((resp) => {
             const parser = new xml2js.Parser();
             parser.parseString(resp.data, function (err, result) {
-                console.log(result);
+
+                const taxAssessment = result['SearchResults:searchresults'].response[0].results[0].result[0].taxAssessment;
+                const taxAssessmentYear = result['SearchResults:searchresults'].response[0].results[0].result[0].taxAssessmentYear
+                const zestimate = result['SearchResults:searchresults'].response[0].results[0].result[0].zestimate[0];
             });
         });
     }
@@ -58,6 +61,7 @@ class Landing extends Component {
     componentDidMount() {
         this.callZillowAPI('2114+Bigelow+Ave', 'Seattle%2C+WA');
     }
+    
     handleNavChange(event, navIndex) {
         this.setState({navIndex});
         const path = this.routes[navIndex];
