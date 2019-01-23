@@ -31,7 +31,7 @@ class Landing extends Component {
         };
 
         this.handleNavChange = this.handleNavChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);(
+        this.onSubmit = this.onSubmit.bind(this);
         this.callZillowAPI = this.callZillowAPI.bind(this);
     }
 
